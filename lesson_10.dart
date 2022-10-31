@@ -1,44 +1,38 @@
 import 'dart:io';
 
 void main() {
-  st();
+  binarySherch(0, 128);
 }
 
-void st() {
-  stdout.write("Введите число от 1 до 100: ");
-  int number = int.parse(stdin.readLineSync()!);
-  stdout.write("Загаданное число больше\n");
-  int number1 = int.parse(stdin.readLineSync()!);
-  stdout.write("Загаданное число меньше\n ");
-  int number2 = int.parse(stdin.readLineSync()!);
-  stdout.write('С первой попытки!');
-  int number3 = int.parse(stdin.readLineSync()!);
+// Необходимо написать программу, которая угадывает загаданное пользователем число от 1 до 128,
+// за как можно меньшее количество шагов. Программа выдаёт предполагаемые числа, а пользователь отвечает, больше его число или меньше, чем число на экране.
 
-  int min = 1;
-  int max = 100;
+void binarySherch(int min, int max) {
+  print('Загадайте число от 1 до 128');
+  int min = 0;
+  int max = 128;
   int mid = (min + max) ~/ 2;
-  int guess = 32;
+  String answer = '';
+  int counter = 0;
 
-  if (number == guess) print('С первой попытки!');
+  while (answer != 'yes') {
+    print('Ваше число $mid?');
+    answer = stdin.readLineSync()!;
 
-  while (mid != number);
-  if (number > guess) ;
-
-  stdout.write("Загаданное число больше\n");
-
-  min = guess;
-  guess = min;
-
-  if (number < guess) ;
-
-  stdout.write("Загаданное число меньше\n ");
-
-  max = guess;
-  guess = max;
-
-  stdout.write("В яблочко, с '' попытки");
-
-  print(number2);
-  print(number1);
-  print(number3);
+    if (answer == 'больше') {
+      min = mid;
+      mid = (min + min) ~/ 2;
+      counter++;
+    } else if (answer == 'меньше') {
+      max = mid;
+      mid = (min + min) ~/ 2;
+      counter++;
+    } else if (answer == 'да') {
+      print('Конец игры!');
+      print('$counter');
+    } else {
+      print('Введите корректные  данные');
+      answer = stdin.readLineSync()!;
+    }
+  }
 }
